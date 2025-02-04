@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:Snake"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Name="BackgroundColor">#4C4C4C</SolidColorBrush>
+        <SolidColorBrush x:Name="GridColor">#727272</SolidColorBrush>
+        <SolidColorBrush x:Name="GridLines">#2E2E2E</SolidColorBrush>
+        <SolidColorBrush x:Name="TextColor">#EBEBEB</SolidColorBrush>
+        <SolidColorBrush x:Name="OverlayColor">#7F000000</SolidColorBrush>
+        <FontFamily x:Name="MainFont">Assets/#Azeret Mono</FontFamily>
     </Application.Resources>
 </Application>

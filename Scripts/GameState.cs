@@ -87,7 +87,7 @@ namespace Snake.Scripts
             Grid[pos.Row, pos.Column] = GridValue.Snake;
         }
 
-        private void RemoveTail(Position pos)
+        private void RemoveTail()
         {
             Position tail = TailPosition();
             Grid[tail.Row, tail.Column] = GridValue.Empty;
@@ -122,7 +122,7 @@ namespace Snake.Scripts
         public void Move()
         {
             Position newHeadPos = HeadPosition().Translate(Dir);
-            
+
             GridValue hit = WillHit(newHeadPos);
 
             if (hit == GridValue.Outside || hit == GridValue.Snake)
@@ -134,6 +134,12 @@ namespace Snake.Scripts
                 RemoveTail();
                 AddHead(newHeadPos);
             }
-
+            else if(hit == GridValue.Food)
+            {
+                AddHead(newHeadPos);
+                Score++;
+                AddFood();
+            }
+        }
     }
 }
