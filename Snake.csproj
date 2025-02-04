@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\AzeretMono-Regular.ttf" />
+    <None Remove="Assets\BodyCell.png" />
+    <None Remove="Assets\DeadBodyCell.png" />
+    <None Remove="Assets\DeadHeadCell.png" />
+    <None Remove="Assets\EmptyCell.png" />
+    <None Remove="Assets\FoodCell.png" />
+    <None Remove="Assets\HeadCell.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\AzeretMono-Regular.ttf" />
+    <Resource Include="Assets\BodyCell.png" />
+    <Resource Include="Assets\DeadBodyCell.png" />
+    <Resource Include="Assets\DeadHeadCell.png" />
+    <Resource Include="Assets\EmptyCell.png" />
+    <Resource Include="Assets\FoodCell.png" />
+    <Resource Include="Assets\HeadCell.png" />
+  </ItemGroup>
+
+</Project>
