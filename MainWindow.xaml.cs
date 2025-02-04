@@ -4,6 +4,7 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using Snake.Scripts;
 using Snake.Scripts.Enum;
+using System.Windows.Input;
 
 
 namespace Snake
@@ -33,14 +34,57 @@ namespace Snake
             gameState = new GameState(rows, cols);
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Draw();
+            await GameLoop();
         }
 
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
+            if (gameState.GameOver)
+            {
+                return;
+            }
 
+            switch (e.Key)
+            {
+                case Key.Left:
+                    gameState.ChangeDirection(Direction.Left);
+                    break;
+                case Key.A:
+                    gameState.ChangeDirection(Direction.Left);
+                    break;
+                case Key.Up:
+                    gameState.ChangeDirection(Direction.Up);
+                    break;
+                case Key.W:
+                    gameState.ChangeDirection(Direction.Up);
+                    break;
+                case Key.Right:
+                    gameState.ChangeDirection(Direction.Right);
+                    break;
+                case Key.D:
+                    gameState.ChangeDirection(Direction.Right);
+                    break;
+                case Key.Down:
+                    gameState.ChangeDirection(Direction.Down);
+                    break;
+                case Key.S:
+                    gameState.ChangeDirection(Direction.Down);
+                    break;
+
+            }
+        }
+
+        private async Task GameLoop()
+        {
+            while (!gameState.GameOver)
+            {
+                await Task.Delay(100);
+                gameState.Move();
+                Draw();
+            }
         }
 
         private Image[,] SetupGrid()
@@ -70,6 +114,7 @@ namespace Snake
         private void Draw()
         {
             DrawGrid();
+            ScoreText.Text = $"SCORE: {gameState.Score}";
         }
 
         private void DrawGrid()
