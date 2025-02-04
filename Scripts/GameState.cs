@@ -65,5 +65,75 @@ namespace Snake.Scripts
             Position pos = empty[random.Next(0, empty.Count)];
             Grid[pos.Row, pos.Column] = GridValue.Food;
         }
+
+        public Position HeadPosition()
+        {
+            return snakePositions.First.Value;
+        }
+
+        public Position TailPosition()
+        {
+            return snakePositions.Last.Value;
+        }
+
+        public IEnumerable<Position> SnakePositions()
+        {
+            return snakePositions;
+        }
+
+        private void AddHead(Position pos)
+        {
+            snakePositions.AddFirst(pos);
+            Grid[pos.Row, pos.Column] = GridValue.Snake;
+        }
+
+        private void RemoveTail(Position pos)
+        {
+            Position tail = TailPosition();
+            Grid[tail.Row, tail.Column] = GridValue.Empty;
+            snakePositions.RemoveLast();
+        }
+
+        public void ChangeDirection(Direction dir)
+        {
+            Dir = dir;
+        }
+
+        private bool IsOutsideGrid(Position pos)
+        {
+            return pos.Row < 0 || pos.Row >= Rows || pos.Column < 0 || pos.Column >= Columns;
+        }
+
+        private GridValue WillHit(Position pos)
+        {
+            if(IsOutsideGrid(pos))
+            {
+                return GridValue.Outside;
+            }
+
+            if(pos == TailPosition())
+            {
+                return GridValue.Empty;
+            }
+
+            return Grid[pos.Row, pos.Column];
+        }
+
+        public void Move()
+        {
+            Position newHeadPos = HeadPosition().Translate(Dir);
+            
+            GridValue hit = WillHit(newHeadPos);
+
+            if (hit == GridValue.Outside || hit == GridValue.Snake)
+            {
+                GameOver = true;
+            }
+            else if (hit == GridValue.Empty)
+            {
+                RemoveTail();
+                AddHead(newHeadPos);
+            }
+
     }
 }
